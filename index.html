@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paw Jenny 🐾</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8bbd0; /* Light Pink */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #ec407a; /* Pink */
+            color: #ffffff; /* White */
+            padding: 1em;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1em;
+        }
+
+        header img {
+            height: 50px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+
+        header h1 span {
+            font-size: 1.5em;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+        }
+
+        nav ul li {
+            margin: 0 1em;
+        }
+
+        nav ul li a {
+            color: #ffffff; /* White */
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 2em 0;
+            background-color: #ffe0b2; /* Light Orange */
+            color: #ffffff; /* White */
+            position: relative;
+        }
+
+        .hero h2 {
+            background-color: rgba(236, 64, 122, 0.7); /* Pink */
+            display: inline-block;
+            padding: 1em 2em;
+            border-radius: 5px;
+            font-size: 3em;
+        }
+
+        .hero p {
+            margin-top: 1em;
+            font-size: 1.2em;
+            background-color: rgba(236, 64, 122, 0.7); /* Pink */
+            display: inline-block;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+        }
+
+        .products, .cart, .chachandraaulia {
+            padding: 2em;
+            flex: 1;
+            display: none;
+            color: #ec407a; /* Pink */
+        }
+
+        .products, .cart, .chachandraaulia {
+            background-color: #ffe0b2; /* Light Orange */
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em;
+            justify-content: center;
+        }
+
+        .product-item {
+            background-color: #ffffff; /* White */
+            border: 1px solid #ec407a; /* Pink */
+            border-radius: 5px;
+            padding: 1em;
+            text-align: center;
+            width: 200px;
+            cursor: pointer;
+            color: #ec407a; /* Pink */
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ffffff; /*white*/
+            display: flex;
+             flex-direction: column;
+              align-items: center;
+        }
+
+
+        .product-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .quantity-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5em;
+            margin-top: 1em;
+        }
+
+        .quantity-buttons button {
+            background-color: #ec407a; /* Pink */
+            color: #ffffff; /* White */
+            border: none;
+            padding: 0.5em 1em;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .quantity-buttons button:hover {
+            background-color: #d81b60; /* Darker Pink */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ec407a; /* Pink */
+            border-radius: 5px;
+            padding: 0.5em;
+            font-size: 1em;
+            line-height: 1.5em; /* Adjust line-height to center the number vertically */
+            box-sizing: border-box; /* Ensure padding is included in the width */
+        }
+
+        .highlight-box {
+            background-color: #f8bbd0; /* Light Pink */
+            border-radius: 10px;
+            padding: 1em;
+            margin-bottom: 1em;
+        }
+
+        .highlight {
+            color: #ec407a; /* Pink */
+            font-weight: bold;
+        }
+
+        .social-links {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em;
+            justify-content: center;
+        }
+
+        .social-links li {
+            margin: 0.5em 0;
+        }
+
+        .social-links a {
+            color: #ffffff; /* White */
+            background-color: #ec407a; /* Pink */
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #d81b60; /* Darker Pink */
+        }
+
+        .checkout-button {
+            background-color: #ec407a; /* Pink */
+            color: #ffffff; /* White */
+            border: none;
+            padding: 1em 2em;
+            cursor: pointer;
+            font-size: 1.2em;
+            border-radius: 10px;
+            margin-top: 1em;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkout-button:hover {
+            background-color: #d81b60; /* Darker Pink */
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .quantity-input {
+            width: 50px;
+        text-align: center;
+        border: 1px solid #ffffff; /* white */
+        border-radius: 5px;
+        padding: 0.5em;
+        font-size: 1em;
+        line-height: 1.5em; /* Adjust line-height to center the number vertically */
+        box-sizing: border-box; /* Ensure padding is included in the width */
+    }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em;
+            border-bottom: 1px solid #ec407a; /* Pink */
+            background-color: #ffffff; /* White */
+            border: 1px solid #ec407a; /* Pink */
+            border-radius: 10px;
+            padding: 1em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .total-price {
+            text-align: right;
+            font-size: 1.2em;
+            margin-top: 1em;
+            color: #ec407a; /* Pink */
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            color: #ec407a; /* Pink */
+            font-size: 1.2em;
+            margin-top: 1em;
+        }
+
+        .contact-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffffff; /* White */
+            border: 1px solid #ec407a; /* Pink */
+            border-radius: 10px;
+            padding: 1em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+        align-items: center;
+        justify-content: center; /* Hide by default */
+        }
+
+        .contact-buttons a {
+            display: block;
+            margin: 0.5em 0;
+            padding: 0.5em;
+            background-color: #ec407a; /* Pink */
+            color: #ffffff; /* White */
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-buttons a:hover {
+            background-color: #d81b60; /* Darker Pink */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-buttons-cancel-button {
+    background-color: #ff69b4; /* Hot Pink */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.contact-buttons-cancel-button:hover {
+    background-color: #ff1493; /* Deep Pink */
+}
+
+        .notification {
+            display: none;
+            background-color: #ffeb3b; /* Yellow */
+            color: #000000; /* Black */
+            padding: 1em;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 1em;
+        }
+
+        .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+        padding-top: 60px;
+    }
+
+    .modal-content {
+    background-color: #ffe4e1; /* Light Pink */
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #ff69b4; /* Hot Pink */
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    color: #ff1493; /* Deep Pink */
+}
+
+.modal-content label {
+    display: block;
+    margin-top: 10px;
+    color: #ff1493; /* Deep Pink */
+}
+
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ff69b4; /* Hot Pink */
+    border-radius: 5px;
+    background-color: #fff0f5; /* Lavender Blush */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.modal-content button {
+    background-color: #ff69b4; /* Hot Pink */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content button:hover {
+    background-color: #ff1493; /* Deep Pink */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+    </style>
+</head>
+<body>
+                    <!-- Notification for data privacy -->
+                    <div id="privacy-notification" class="modal">
+                        <div class="modal-content">
+                            <span class="close-button" onclick="closePrivacyNotification()">&times;</span>
+                            <h3>Privacy Notice</h3>
+                            <p>Any data you interact with on this site is not stored. The data copied to your clipboard is only accessible to you. I do not collect or store any personal information. Because this website is a dummy created by Cha.nlia, the only person responsible for its development.</p>
+                        </div>
+                    </div>
+    <header>
+        <img src="https://i.pinimg.com/736x/b0/40/e7/b040e76ad3b62145df9c938f4c96e5b8.jpg">
+        <h1>🐾 Paw Jenny 🐾</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Home 🏠</a></li>
+            <li><a href="#" onclick="showSection('products')">Products 🛍️</a></li>
+            <li><a href="#" onclick="showSection('cart')">Cart 🛒</a></li>
+            <li><a href="#" onclick="showSection('chachandraaulia')">Chachandraaulia 💬</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="home" class="hero">
+            <h2>Welcome to Paw Jenny 🐾</h2>
+            <p>"Totally Real Cat Store (We Promise): Pineapple cats are out of stock. Cake cats? Never had them. Bla bla bla cats? They're just words. Enjoy your visit to nowhere! (Because Jenny ate all the stock... and maybe a few customers too.)". 🐶🐱</p>
+        </section>
+        <section id="products" class="products">
+            <h2>Our Products 🛍️</h2>
+            <div class="product-list">
+                <div class="product-item">
+                    <img src="https://i.pinimg.com/236x/94/8c/a0/948ca0096041cac30d2c295607b609e3.jpg" alt="sbubu">
+                    <h3>sbubu               </h3>
+                    <p>sedotan beri = straw berry = strawberry</p>
+                    <p>Price: $831</p>
+                    <div class="quantity-buttons">
+                        <button onclick="decreaseQuantity('sbubu')">-</button>
+                        <input type="number" class="quantity-input" id="quantity-sbubu" value="0" min="0" onchange="updateQuantity('sbubu', 831)">
+                        <button onclick="increaseQuantity('sbubu')">+</button>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://i.pinimg.com/736x/ea/e5/10/eae51071e868107962c719a6edbe4bad.jpg" alt="Banana">
+                    <h3>Banana              </h3>
+                    <p>roda aku = ban ana = banana</p>
+                    <p>Price: $459</p>
+                    <div class="quantity-buttons">
+                        <button onclick="decreaseQuantity('Banana')">-</button>
+                        <input type="number" class="quantity-input" id="quantity-Banana" value="0" min="0" onchange="updateQuantity('Banana', 459)">
+                        <button onclick="increaseQuantity('Banana')">+</button>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://i.pinimg.com/736x/1b/bf/b5/1bbfb5365411e8a8a6a8679c409f0f6d.jpg" alt="Watermelon">
+                    <h3>Watermelon</h3>
+                    <p>melon jus = airnya melon = water melon = watermelon</p>
+                    <p>Price: $520</p>
+                    <div class="quantity-buttons">
+                        <button onclick="decreaseQuantity('Watermelon')">-</button>
+                        <input type="number" class="quantity-input" id="quantity-Watermelon" value="0" min="0" onchange="updateQuantity('Watermelon', 520)">
+                        <button onclick="increaseQuantity('Watermelon')">+</button>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://i.pinimg.com/736x/27/6e/41/276e4166330c80acb467898353e33b92.jpg" alt="Cookie">
+                    <h3>Cookie              </h3>
+                    <p>memasak ie = cook ie = cookie</p>
+                    <p>Price: $180305</p>
+                    <div class="quantity-buttons">
+                        <button onclick="decreaseQuantity('Cookie')">-</button>
+                        <input type="number" class="quantity-input" id="quantity-Cookie" value="0" min="0" onchange="updateQuantity('Cookie', 180305)">
+                        <button onclick="increaseQuantity('Cookie')">+</button>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://i.pinimg.com/236x/cc/a3/b8/cca3b8a245260c38fc3c722ede8a7c74.jpg" alt="Lemon">
+                    <h3>Lemon               </h3>
+                    <p>lem aktif = lem on = lemon</p>
+                    <p>Price: $143</p>
+                    <div class="quantity-buttons">
+                        <button onclick="decreaseQuantity('Lemon')">-</button>
+                        <input type="number" class="quantity-input" id="quantity-Lemon" value="0" min="0" onchange="updateQuantity('Lemon', 143)">
+                        <button onclick="increaseQuantity('Lemon')">+</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="cart" class="cart">
+            <h2>Your Cart 🛒</h2>
+            <div id="cart-items"></div>
+            <p id="empty-cart-message" class="empty-cart-message">Your cart is currently empty.</p>
+            <p id="total-price" class="total-price">Total Price: $0</p>
+            <button class="checkout-button" onclick="checkout()">Checkout</button>
+        
+            <!-- Modal for collecting buyer information -->
+            <div id="buyer-info-modal" class="modal">
+                <div class="modal-content">
+                    <h3>Enter Buyer Information</h3>
+                    <label for="buyer-name">Name:</label>
+                    <select id="buyer-name">
+                        <option value="Tidak Punya Nama">Tidak Punya Nama</option>
+                        <option value="custom">Other (type your own)</option>
+                    </select>
+                    <input type="text" id="custom-name" placeholder="Type your name" style="display:none;">
+                    <label for="buyer-address">Address:</label>
+                    <select id="buyer-address">
+                        <option value="Bumi">Bumi</option>
+                        <option value="Bulan">Bulan</option>
+                        <option value="Kandang Musang">Kandang Musang</option>
+                        <option value="custom">Other (type your own)</option>
+                    </select>
+                    <input type="text" id="custom-address" placeholder="Type your address" style="display:none;">
+                    <label for="payment-method">Payment Method:</label>
+                    <select id="payment-method">
+                        <option value="Cinta">Cinta</option>
+                        <option value="Janji Manis">Janji Manis</option>
+                        <option value="Ngutang Dulu">Ngutang Dulu</option>
+                        <option value="custom">Other (type your own)</option>
+                    </select>
+                    <input type="text" id="custom-payment" placeholder="Type your payment method" style="display:none;">
+                    <label for="shipping-method">Shipping Method:</label>
+                    <select id="shipping-method">
+                        <option value="Mimpi">Mimpi</option>
+                        <option value="Telepati">Telepati</option>
+                        <option value="custom">Other (type your own)</option>
+                    </select>
+                    <input type="text" id="custom-shipping" placeholder="Type your shipping method" style="display:none;">
+                    <button onclick="submitBuyerInfo()">Submit</button>
+                    <button onclick="cancelCheckout()">Cancel</button>
+                </div>
+            </div>
+            <div id="contact-box" class="contact-box" style="display:none;">
+                <h3>Order Through</h3>
+                <div class="contact-buttons">
+                    <a href="#" id="contact-whatsapp" onclick="resetCart()">WhatsApp</a>
+                    <a href="#" id="contact-line" onclick="resetCart()">Line</a>
+                    <a href="#" id="contact-telegram" onclick="resetCart()">Telegram</a>
+                    <a href="#" id="contact-sms" onclick="resetCart()">SMS</a>
+                    <a href="mailto:info@pawjenny.com" id="contact-email" onclick="resetCart()">Email</a>
+                    <p>This is just for decoration—no personal data, no orders. But if you're curious about who created this website, feel free to stalk my social media in the 'chachandraaulia' section. And if you feel like wasting your time chatting about orders, sure, go ahead—but don’t expect a package. We’re out of stock, and honestly, even my customers from the Mesozoic era are still waiting for their packages.</p>
+                </div>
+                <button onclick="cancelCheckout()">Cancel</button>
+            </div>
+            <div id="notification-empty" class="notification">No items to checkout, your cart is empty.</div>
+            <div id="notification-copied" class="notification">Order details copied to clipboard!</div>
+            <div id="notification" class="notification">You have changed your order. Please click the checkout button again.</div>
+        </section>
+                <section id="chachandraaulia" class="chachandraaulia">
+                    <h2>Chachandraaulia (Chacha, Chan, Chandra, Memon, Tata, Aulia, Aul, Chaul, Chandra Aulia, Ndra, or literally whatever you decide to call me...)  💬</h2>
+                    <div class="highlight-box">
+                        <p class="highlight">"So here’s the story: I’m Chachandraaulia, a midwifery student who thought this project would be as easy as a cat nap… but nope. Turns out, it was more like trying to catch a laser pointer. At first, I regretted even starting it—like a cat that accidentally knocked something over—but finally here we are. It’s done, and I’m just sitting here like a cat who finally got their snack after hours of waiting. Next? Maybe, just maybe, I’ll make a game in the future... after a good nap, of course. Wanna know more about me? Check out my socials... or just keep waiting for that product that’s never restocking... but hey, I’m still trying!"</p>
+                    </div>
+                    <ul class="social-links">
+                        <li><a href="https://www.instagram.com/cha.nlia" target="_cha.nlia">Instagram 📸</a></li>
+                        <li><a href="https://www.tiktok.com/@cha.nlia" target="_cha.nlia">TikTok 🎵</a></li>
+                        <li><a href="https://open.spotify.com/user/31bc35x2mak5lrhm5shgpp3x2bi4?si=cDtJeJ6sR9-uqtkBSV362Q" target="_cha.nlia">Spotify 🎧</a></li>
+                        <li><a href="https://www.linkedin.com/in/chandra-aulia-a48a35336?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app&fbclid=PAZXh0bgNhZW0CMTEAAaaYHrBo8tMtwfYY26pOf5nhwC9BWfDiIzWJSnyXVOikadMPpPL2MZLygcM_aem_F6UCcc4C3WKLUejfdiuF1A" target="_chandra aulia">LinkedIn 💼</a></li>
+                        <li><a href="https://github.com/chachandraaulia"_chachandraaulia">GitHub 💻</a></li>
+                        <li><a href="https://www.youtube.com/@chachandraaulia" target="_chachandraaulia">YouTube 📹</a></li>
+                        <li><a href="https://www.pinterest.com/chachandraaulia" target="_chachandraaulia">Pinterest 📌</a></li>
+                    </ul>
+                </section>
+            </main>
+            <footer>
+                <p>&copy; cha.nlia </p>
+            </footer>
+            <script>
+               let cart = [];
+let checkoutClicked = false;
+let previousCartState = [];
+        
+                function showSection(sectionId) {
+                    document.querySelectorAll('main > section').forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    document.getElementById(sectionId).style.display = 'block';
+        
+                    // Show contact box only in the cart section
+                    if (sectionId === 'cart' && checkoutClicked) {
+                        document.getElementById('contact-box').style.display = 'block';
+                    } else {
+                        document.getElementById('contact-box').style.display = 'none';
+                    }
+                }
+        
+                function closePrivacyNotification() {
+            document.getElementById('privacy-notification').style.display = 'none';
+        }
+ // Show the privacy notification when the page loads
+ document.getElementById('privacy-notification').style.display = 'block';
+
+                function updateQuantity(productName, price) {
+        const quantityInput = document.getElementById(`quantity-${productName}`);
+        const quantity = parseInt(quantityInput.value);
+        const existingProduct = cart.find(item => item.name === productName);
+        if (existingProduct) {
+            existingProduct.quantity = quantity;
+            existingProduct.totalPrice = quantity * price;
+        } else {
+            cart.push({ name: productName, quantity: quantity, totalPrice: quantity * price });
+        }
+        if (quantity === 0) {
+            cart = cart.filter(item => item.name !== productName);
+        }
+        updateCart();
+        if (checkoutClicked) {
+            document.getElementById('contact-box').style.display = 'none';
+            document.getElementById('notification').style.display = 'block';
+            checkoutClicked = false;
+        }
+    }
+
+    function increaseQuantity(productName) {
+        const quantityInput = document.getElementById(`quantity-${productName}`);
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+        const price = parseInt(quantityInput.getAttribute('onchange').match(/\d+/)[0]);
+        updateQuantity(productName, price);
+    }
+
+    function decreaseQuantity(productName) {
+        const quantityInput = document.getElementById(`quantity-${productName}`);
+        if (parseInt(quantityInput.value) > 0) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+            const price = parseInt(quantityInput.getAttribute('onchange').match(/\d+/)[0]);
+            updateQuantity(productName, price);
+        }
+    }
+
+
+function updateCart() {
+        const cartItemsContainer = document.getElementById('cart-items');
+        cartItemsContainer.innerHTML = '';
+        let totalPrice = 0;
+        cart.forEach(item => {
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+            cartItem.innerHTML = `
+                <span>${item.name}</span>
+                <span>${item.quantity}</span>
+                <span>$${item.totalPrice}</span>
+            `;
+            cartItemsContainer.appendChild(cartItem);
+            totalPrice += item.totalPrice;
+        });
+        document.getElementById('total-price').innerText = `Total Price: $${totalPrice}`;
+        document.getElementById('empty-cart-message').style.display = cart.length === 0 ? 'block' : 'none';
+    }
+
+    function checkout() {
+    if (cart.length === 0) {
+        document.getElementById('notification-empty').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('notification-empty').style.display = 'none';
+        }, 3000);
+        return;
+    }
+    previousCartState = JSON.parse(JSON.stringify(cart)); // Save the current state of the cart
+    document.getElementById('buyer-info-modal').style.display = 'block';
+    checkoutClicked = true;
+}
+    function submitBuyerInfo() {
+    const buyerName = document.getElementById('buyer-name').value === 'custom' ? document.getElementById('custom-name').value : document.getElementById('buyer-name').value;
+    const buyerAddress = document.getElementById('buyer-address').value === 'custom' ? document.getElementById('custom-address').value : document.getElementById('buyer-address').value;
+    const paymentMethod = document.getElementById('payment-method').value === 'custom' ? document.getElementById('custom-payment').value : document.getElementById('payment-method').value;
+    const shippingMethod = document.getElementById('shipping-method').value === 'custom' ? document.getElementById('custom-shipping').value : document.getElementById('shipping-method').value;
+
+    const orderDetails = cart.map(item => `🛒 *Product:* ${item.name}\n🔢 *Quantity:* ${item.quantity}\n💵 *Total Price:* $${item.totalPrice}`).join('\n\n');
+    const totalPrice = document.getElementById('total-price').innerText;
+    const orderText = `(Pre-order like a cat naps—no end in sight! 🐱💤)\n\n📋 *Order Details:*\n\n👤 *Buyer Name:* ${buyerName}\n🏠 *Address:* ${buyerAddress}\n💳 *Payment Method:* ${paymentMethod}\n🚚 *Shipping Method:* ${shippingMethod}\n\n${orderDetails}\n\n💰 *${totalPrice}*\n\n🐾 *📦Thank you for your order! May you be blessed with unlimited patience... (your package will arrive at a time that doesn’t exist⏳🚫) *🐾`;
+    navigator.clipboard.writeText(orderText).then(() => {
+        document.getElementById('notification-copied').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('notification-copied').style.display = 'none';
+        }, 3000);
+    });
+
+    const encodedOrderText = encodeURIComponent(orderText);
+    document.getElementById('contact-whatsapp').href = `https://wa.me/?text=${encodedOrderText}`;
+    document.getElementById('contact-line').href = `https://line.me/R/msg/text/?${encodedOrderText}`;
+    document.getElementById('contact-telegram').href = `https://t.me/share/url?url=&text=${encodedOrderText}`;
+    document.getElementById('contact-sms').href = `sms:?body=${encodedOrderText}`;
+    document.getElementById('contact-email').href = `mailto:info@pawjenny.com?subject=Order&body=${encodedOrderText}`;
+
+    document.getElementById('buyer-info-modal').style.display = 'none';
+    document.getElementById('contact-box').style.display = 'block';
+}
+
+function cancelCheckout() {
+    cart = JSON.parse(JSON.stringify(previousCartState)); // Restore the previous state of the cart
+    updateCart();
+    document.getElementById('buyer-info-modal').style.display = 'none';
+    document.getElementById('contact-box').style.display = 'none';
+    checkoutClicked = false;
+}
+
+document.getElementById('buyer-name').addEventListener('change', function() {
+    if (this.value === 'custom') {
+        document.getElementById('custom-name').style.display = 'block';
+    } else {
+        document.getElementById('custom-name').style.display = 'none';
+    }
+});
+
+document.getElementById('buyer-address').addEventListener('change', function() {
+    if (this.value === 'custom') {
+        document.getElementById('custom-address').style.display = 'block';
+    } else {
+        document.getElementById('custom-address').style.display = 'none';
+    }
+});
+
+document.getElementById('payment-method').addEventListener('change', function() {
+    if (this.value === 'custom') {
+        document.getElementById('custom-payment').style.display = 'block';
+    } else {
+        document.getElementById('custom-payment').style.display = 'none';
+    }
+});
+
+document.getElementById('shipping-method').addEventListener('change', function() {
+    if (this.value === 'custom') {
+        document.getElementById('custom-shipping').style.display = 'block';
+    } else {
+        document.getElementById('custom-shipping').style.display = 'none';
+    }
+});
+
+    const encodedOrderText = encodeURIComponent(orderText);
+    document.getElementById('contact-whatsapp').href = `https://wa.me/?text=${encodedOrderText}`;
+    document.getElementById('contact-line').href = `https://line.me/R/msg/text/?${encodedOrderText}`;
+    document.getElementById('contact-telegram').href = `https://t.me/share/url?url=&text=${encodedOrderText}`;
+    document.getElementById('contact-sms').href = `sms:?body=${encodedOrderText}`;
+    document.getElementById('contact-email').href = `mailto:info@pawjenny.com?subject=Order&body=${encodedOrderText}`;
+
+    document.getElementById('contact-box').style.display = 'block';
+    document.getElementById('notification').style.display = 'none';
+    document.getElementById('buyer-info-modal').style.display = 'none';
+
+    function showSection(sectionId) {
+    document.querySelectorAll('main > section').forEach(section => {
+        section.style.display = 'none';
+    });
+    document.getElementById(sectionId).style.display = 'block';
+
+    // Show contact box only in the cart section if only checkout has been clicked
+    if (sectionId === 'cart') {
+        if (cart.length === 0) {
+            document.getElementById('notification-empty').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('notification-empty').style.display = 'none';
+            }, 3000);
+        } else if (checkoutClicked) {
+            document.getElementById('contact-box').style.display = 'block';
+        } else {
+            document.getElementById('contact-box').style.display = 'none';
+        }
+    }
+}
+        
+function showSection(sectionId) {
+    document.querySelectorAll('main > section').forEach(section => {
+        section.style.display = 'none';
+    });
+    document.getElementById(sectionId).style.display = 'block';
+
+    // Show contact box only in the cart section if checkout has been clicked
+    if (sectionId === 'cart') {
+        if (cart.length === 0) {
+            document.getElementById('notification-empty').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('notification-empty').style.display = 'none';
+            }, 3000);
+        } else if (checkoutClicked) {
+            document.getElementById('contact-box').style.display = 'block';
+        } else {
+            document.getElementById('contact-box').style.display = 'none';
+        }
+    }
+}
+function resetCart() {
+    cart = [];
+    updateCart();
+    document.querySelectorAll('.quantity-input').forEach(input => input.value = 0);
+    document.getElementById('contact-box').style.display = 'none';
+    showSection('home');
+}
+
+// Show the home section by default
+showSection('home');
+            </script>
+        </body>
+        </html>
